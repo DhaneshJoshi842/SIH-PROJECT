@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://wallpaperaccess.com/full/773426.jpg');
+            background-size: cover;
+        }
+
+
+
+
+
+
+        .sub_cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            /* align-items: center; */
+            margin-top: 100px;
+        }
+
+        .card {
+            width: 18rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #7b9a8c;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-description {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: rgb(239, 220, 220);
+        }
+
+        button {
+            background-color: #40916c;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1b4332;
+        }
+
+        .stop-btn {
+            background-color: red;
+        }
+
+        .stop-btn:hover {
+            background-color: darkred;
+        }
+
+        .like-btn {
+            height: 40px;
+            position: absolute;
+            right: 0px;
+        }
+
+        .liked {
+            color: red;
+        }
+
+        .two_btns {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="color:#f0f8ff; display: flex; justify-content: center; font-size: larger; font-weight: bolder; position: relative; top: 60px;">
+        Your Favorate Herbs Are:
+    </div>
+    <div class="sub_cards">
+        <% favherbs.forEach(herb=> { %>
+            <div class="card">
+                <img src="<%= herb.image %>" class="card-img-top" alt="<%= herb.botanicalName %>">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <u>
+                            <%= herb.commonNames[0] %>:
+                        </u>
+                        <button class="like-btn <%= herb.fav === true ? 'liked' : '' %>"
+                            onclick="toggleLike('<%= herb.herb_id %>', this)">
+                            <i class="fa-solid fa-heart"></i>
+                            Liked
+                        </button>
+
+                    </h4>
+
+                    <p class="card-text"><strong>Common Names:</strong>
+                        <%= herb.commonNames %>
+                    </p>
+                    <p class="card-text"><strong>Botanical Name:</strong>
+                        <%= herb.botanicalName %>
+                    </p>
+                    <p class="card-text"><strong>Habitat:</strong>
+                        <%= herb.habitat %>
+                    </p>
+                    <p class="card-text"><strong>Medicinal Uses:</strong>
+                        <%= herb.medicinalUses %>
+                    </p>
+                    <p class="card-text"><strong>Cultivation Methods:</strong>
+                        <%= herb.cultivationMethods %>
+                    </p>
+                    <div class="two_btns">
+                        <form method="get" action="/3Dmodel/<%= herb.herb_id %>">
+                            <button type="submit">3D Model</button>
+                        </form>
+                        <button class="voice-btn"
+                            onclick="toggleSpeech('<%= herb.commonNames %>', '<%= herb.botanicalName %>', '<%= herb.habitat %>', '<%= herb.medicinalUses %>', '<%= herb.cultivationMethods %>', this)">
+                            Listen It
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+    </div>
+
+    <script>
+        let currentUtterance = null;
+        let isSpeaking = false;
+
+        function speakHerb(commonNames, botanicalName, habitat, medicinalUses, cultivationMethods) {
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                currentUtterance = null;
+                isSpeaking = false;
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(
+                `Common Names: ${commonNames}. Botanical Name: ${botanicalName}. Habitat: ${habitat}. Medicinal Uses: ${medicinalUses}. Cultivation Methods: ${cultivationMethods}.`
+            );
+            currentUtterance.voice = speechSynthesis.getVoices().find(voice => voice.name === 'Google US English');
+            speechSynthesis.speak(currentUtterance);
+            isSpeaking = true;
+        }
+
+        function toggleSpeech(commonNames, botanicalName, habitat, medicinalUses, cultivationMethods, button) {
+            if (isSpeaking) {
+                speechSynthesis.cancel();
+                button.textContent = 'Listen';
+                button.classList.remove('stop-btn');
+                isSpeaking = false;
+            } else {
+                speakHerb(commonNames, botanicalName, habitat, medicinalUses, cultivationMethods);
+                button.textContent = 'Stop';
+                button.classList.add('stop-btn');
+            }
+        }
+    </script>
+</body>
+
+</html>

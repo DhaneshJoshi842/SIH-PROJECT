@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://wallpaperaccess.com/full/773426.jpg');
+            background-size: cover;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+
+
+
+        .sub_cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            width: 28rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #7b9a8c;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-description {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: rgb(239, 220, 220);
+        }
+
+        button {
+            background-color: #40916c;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1b4332;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+
+
+
+        <div class="sub_cards">
+
+            <div class="card">
+                <img src="<%= herb.image %>" class="card-img-top" alt="<%= herb.botanicalName %>">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <u>
+                            <%= herb.commonNames[0] %>:
+                        </u>
+                    </h4>
+                    <p class="card-text"><strong>Common Names:</strong>
+                        <%= herb.commonNames %>
+                    </p>
+                    <p class="card-text"><strong>Botanical Name:</strong>
+                        <%= herb.botanicalName %>
+                    </p>
+                    <p class="card-text"><strong>Habitat:</strong>
+                        <%= herb.habitat %>
+                    </p>
+                    <p class="card-text"><strong>Medicinal Uses:</strong>
+                        <%= herb.medicinalUses %>
+                    </p>
+                    <p class="card-text"><strong>Cultivation Methods:</strong>
+                        <%= herb.cultivationMethods %>
+                    </p>
+                    <form method="get" action="/3Dmodel/<%=herb.herb_id%>">
+                        <button type="submit">3D Model</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

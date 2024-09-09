@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herbal Garden</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://wallpaperaccess.com/full/773426.jpg');
+            background-size: cover;
+        }
+
+        #main {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cards {
+            display: flex;
+            height: 20rem;
+        }
+
+        .card {
+            margin: 10px;
+            background-color: #d8f3dc;
+            width: 15rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-img-top {
+            margin: 0.5rem;
+            width: 90%;
+            border-radius: 8px;
+        }
+
+        .card-body {
+            text-align: center;
+            color: #2d6a4f;
+        }
+
+        .btn-primary {
+            background-color: #40916c;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #1b4332;
+        }
+
+        #search_div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto 10px;
+            /* Reduced bottom margin to bring it closer to the cards */
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+            top: 150px;
+        }
+
+        #search_ip {
+            height: 35px;
+            width: 300px;
+            border: 2px solid green;
+            border-radius: 5px;
+            padding: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #search_btn,
+        #see_fav_btn {
+            height: 40px;
+            margin-left: 10px;
+            padding: 0 15px;
+            border: 2px solid green;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+            background-color: #1b4332;
+            cursor: pointer;
+        }
+
+        #mic_btn {
+            height: 40px;
+            width: 40px;
+            margin-left: 10px;
+            border: none;
+            background: none;
+            color: #93c2af;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        #mic_btn.active {
+            color: green;
+        }
+
+        #main {
+            margin-top: 10px;
+            /* To ensure some space between search div and cards */
+            height: calc(100vh - 150px);
+            /* Adjusted to fit the search bar + cards */
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="search_div">
+        <form method="get" action="/searchData">
+            <input placeholder="Search Herb" id="search_ip" name="herb_name">
+            <button id="mic_btn" type="button"><i class="fa-solid fa-microphone"></i></button>
+            <button id="search_btn" type="submit">Search</button>
+        </form>
+        <form method="get" action="/seeFav">
+            <button type="btn" id="see_fav_btn">See Your Fav Herbs</button>
+        </form>
+    </div>
+    <div id="main">
+        <div id="cards">
+            <% themes.forEach(theme=> { %>
+                <div class="card">
+                    <img src="<%= theme.image %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= theme.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%= theme.description %>
+                        </p>
+                        <form method="get" action="/home/<%= theme.theme_id %>">
+                            <button type="submit" class="btn btn-primary">Learn More</button>
+                        </form>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+    </div>
+
+    <!-- Include Speech Recognition Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search_ip');
+            const micBtn = document.getElementById('mic_btn');
+            let recognition;
+            let isListening = false;
+
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.onresult = (event) => {
+                    const speechResult = event.results[0][0].transcript;
+                    searchInput.value = speechResult;
+                    micBtn.classList.remove('active'); // Turn off the mic button color when done
+                    isListening = false;
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error', event);
+                    micBtn.classList.remove('active'); // Turn off the mic button color on error
+                    isListening = false;
+                };
+
+                micBtn.addEventListener('click', () => {
+                    if (isListening) {
+                        recognition.stop();
+                        micBtn.classList.remove('active');
+                    } else {
+                        recognition.start();
+                        micBtn.classList.add('active');
+                    }
+                    isListening = !isListening;
+                });
+            } else {
+                micBtn.addEventListener('click', () => {
+                    alert('Speech recognition is not supported in this browser.');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
