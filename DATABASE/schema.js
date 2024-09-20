@@ -9,6 +9,7 @@ const HerbSchema = new mongoose.Schema({
     habitat: String,
     medicinalUses: String,
     cultivationMethods: String,
+    PreparationMethods:String,
     image: String,
     vidio: String, // Added video field for each herb
     fav: { type: Boolean, default: false } // Add the fav field

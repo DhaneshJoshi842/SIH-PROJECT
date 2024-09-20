@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -63,14 +65,26 @@
         button:hover {
             background-color: #1b4332;
         }
+
+        .like-btn {
+            height: 40px;
+            position: absolute;
+            right: 0px;
+        }
+
+        .liked {
+            color: red;
+        }
+
+        .two_btns {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-
-
-
 
         <div class="sub_cards">
 
@@ -81,10 +95,19 @@
                         <u>
                             <%= herb.commonNames[0] %>:
                         </u>
+
+
+                        <button class="like-btn <%= herb.fav === true ? 'liked' : '' %>"
+                            onclick="toggleLike('<%= theme.theme_id %>', '<%= herb.herb_id %>', this)">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+
+
                     </h4>
-                    <p class="card-text"><strong>Common Names:</strong>
+                    <p class=" card-text"><strong>Common Names:</strong>
                         <%= herb.commonNames %>
                     </p>
+
                     <p class="card-text"><strong>Botanical Name:</strong>
                         <%= herb.botanicalName %>
                     </p>
@@ -97,14 +120,71 @@
                     <p class="card-text"><strong>Cultivation Methods:</strong>
                         <%= herb.cultivationMethods %>
                     </p>
+                    <p class="card-text"><strong>Preparation Methods:</strong>
+                        <%= herb.PreparationMethods %>
+                    </p>
                     <form method="get" action="/3Dmodel/<%=herb.herb_id%>">
                         <button type="submit">3D Model</button>
                     </form>
+                    <button style="margin-left: 300px; background-color: green;"
+                        onclick="toggleSpeech('<%= herb.commonNames %>', '<%= herb.botanicalName %>', '<%= herb.habitat %>', '<%= herb.medicinalUses %>', '<%= herb.cultivationMethods %>', this)">
+                        Listen
+                    </button>
                 </div>
             </div>
 
         </div>
     </div>
+    <script>
+        let currentUtterance = null;
+        let isSpeaking = false;
+
+        function speakHerb(commonNames, botanicalName, habitat, medicinalUses, cultivationMethods) {
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                currentUtterance = null;
+                isSpeaking = false;
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(
+                `Common Names: ${commonNames}. Botanical Name: ${botanicalName}. Habitat: ${habitat}. Medicinal Uses: ${medicinalUses}. Cultivation Methods: ${cultivationMethods}.`
+            );
+            currentUtterance.voice = speechSynthesis.getVoices().find(voice => voice.name === 'Google US English');
+            speechSynthesis.speak(currentUtterance);
+            isSpeaking = true;
+        }
+
+        function toggleSpeech(commonNames, botanicalName, habitat, medicinalUses, cultivationMethods, button) {
+            if (isSpeaking) {
+                speechSynthesis.cancel();
+                button.textContent = 'Listen';
+                button.style.backgroundColor = '#40916c';  // Change to green when not speaking
+                button.classList.remove('stop-btn');
+                isSpeaking = false;
+            } else {
+                speakHerb(commonNames, botanicalName, habitat, medicinalUses, cultivationMethods);
+                button.textContent = 'Stop';
+                button.style.backgroundColor = 'red';  // Change to red when speaking
+                button.classList.add('stop-btn');
+            }
+        }
+        function toggleLike(themeId, herbId, button) {
+            const isLiked = button.classList.contains('liked');
+            fetch(`/fav/${themeId}/${herbId}`, {
+                method: isLiked ? 'DELETE' : 'POST'
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (!isLiked) {
+                        button.classList.add('liked');
+                    } else {
+                        button.classList.remove('liked');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
 </body>
 
 </html>

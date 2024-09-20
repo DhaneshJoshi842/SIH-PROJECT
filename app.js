@@ -31,8 +31,6 @@ main().then((res) => {
     .catch(err => console.log(err));
 
 
-
-
 app.get('/', async (req, res) => {
     try {
         const themes = await Theme.find(); // Fetching all themes from the database
@@ -83,7 +81,6 @@ app.get('/3Dmodel/:id', async (req, res) => {
 app.get("/searchData", async (req, res) => {
     let { herb_name } = req.query;
 
-
     if (!herb_name) {
         return res.redirect("/"); // Redirect to the home page
     }
@@ -108,7 +105,7 @@ app.get("/searchData", async (req, res) => {
             );
 
             if (herb) {
-                return res.render("perticularHerb.ejs", { herb }); // Send the full herb object as JSON response
+                return res.render("perticularHerb.ejs", { herb,theme }); // Send the full herb object as JSON response
             } else {
                 return res.send("Herb not found"); // Ensure single response
             }
@@ -124,7 +121,7 @@ app.get("/searchData", async (req, res) => {
 app.post("/fav/:themeId/:herbId", async (req, res) => {
     const themeId = req.params.themeId;
     const herbId = req.params.herbId;
-
+    
     try {
         const theme = await Theme.findOne({ theme_id: themeId });
         if (!theme) return res.status(404).send('Theme not found');
@@ -144,6 +141,7 @@ app.post("/fav/:themeId/:herbId", async (req, res) => {
             habitat: herb.habitat,
             medicinalUses: herb.medicinalUses,
             cultivationMethods: herb.cultivationMethods,
+            PreparationMethods:herb.PreparationMethods,
             image: herb.image,
             video: herb.video,
             fav: true // Set fav to true because it's being added as a favorite

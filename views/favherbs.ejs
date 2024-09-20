@@ -34,7 +34,7 @@
         }
 
         .card {
-            width: 18rem;
+            width: 20rem;
             transition: transform 0.3s, box-shadow 0.3s;
             background-color: #7b9a8c;
             position: relative;
@@ -92,7 +92,8 @@
 </head>
 
 <body>
-    <div style="color:#f0f8ff; display: flex; justify-content: center; font-size: larger; font-weight: bolder; position: relative; top: 60px;">
+    <div
+        style="color:#f0f8ff; display: flex; justify-content: center; font-size: larger; font-weight: bolder; position: relative; top: 60px;">
         Your Favorate Herbs Are:
     </div>
     <div class="sub_cards">
@@ -126,6 +127,9 @@
                     </p>
                     <p class="card-text"><strong>Cultivation Methods:</strong>
                         <%= herb.cultivationMethods %>
+                    </p>
+                    <p class="card-text"><strong>Preparation Methods:</strong>
+                        <%= herb.PreparationMethods %>
                     </p>
                     <div class="two_btns">
                         <form method="get" action="/3Dmodel/<%= herb.herb_id %>">

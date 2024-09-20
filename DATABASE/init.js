@@ -1,17 +1,16 @@
-const mongoose = require('mongoose');
-const Theme = require('./schema');
-const themes = require("./data.js");
+// const mongoose = require('mongoose');
+// const Theme = require('./schema');
+// const themes = require("./data.js");
 
-async function insertThemes() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/SIHDB', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
+// async function insertThemes() {
+//     await mongoose.connect("mongodb+srv://dhaneshjoshi842:g8LaZrefvnP0U0Ea@cluster0.lhb2m.mongodb.net/")
+//         .then(() => {
+//             console.log("db connnected");
+//         })
+//     await Theme.insertMany(themes);
+//     console.log("Themes inserted successfully!");
 
-    await Theme.insertMany(themes);
-    console.log("Themes inserted successfully!");
+//     mongoose.connection.close();
+// }
 
-    mongoose.connection.close();
-}
-
-insertThemes().catch(err => console.error(err));
+// insertThemes().catch(err => console.error(err));

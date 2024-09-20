@@ -47,8 +47,17 @@
         .card {
             width: 18rem;
             transition: transform 0.3s, box-shadow 0.3s;
-            background-color: #7b9a8c;
+            background-color: #b9e7d2;
             position: relative;
+            padding: 10px;
+        }
+
+        .card-img-top {
+            margin: auto;
+            margin-top: 10px;
+            width: 90%;
+            border-radius: 8px;
+            height: 150px;
         }
 
         .card:hover {
@@ -71,6 +80,10 @@
             color: white;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            display: flex;
+            margin: auto;
+            height: 40px;
+
         }
 
         button:hover {
@@ -98,6 +111,7 @@
         .two_btns {
             display: flex;
             justify-content: space-between;
+
         }
     </style>
 </head>
@@ -123,47 +137,14 @@
                 <div class="card">
                     <img src="<%= herb.image %>" class="card-img-top" alt="<%= herb.botanicalName %>">
                     <div class="card-body">
-                        <h4 class="card-title">
-                            <u>
-                                <%= herb.commonNames[0] %>:
-                            </u>
-                            <!-- <button class="like-btn <%= herb.fav === true ? 'liked' : '' %>"
-                                    onclick="toggleLike('<%= theme.theme_id %>', '<%= herb.herb_id %>', this)">
-                                <i class="fa-solid fa-heart"></i>
-                            </button> -->
-
-                            <button class="like-btn <%= herb.fav === true ? 'liked' : '' %>"
-                                onclick="toggleLike('<%= theme.theme_id %>', '<%= herb.herb_id %>', this)">
-                                <i class="fa-solid fa-heart"></i>
-                            </button>
-
+                        <h4 class="card-title" style="text-align: center;">
+                            <%= herb.commonNames[0] %>
                         </h4>
-
-                        <p class="card-text"><strong>Common Names:</strong>
-                            <%= herb.commonNames %>
-                        </p>
-                        <p class="card-text"><strong>Botanical Name:</strong>
-                            <%= herb.botanicalName %>
-                        </p>
-                        <p class="card-text"><strong>Habitat:</strong>
-                            <%= herb.habitat %>
-                        </p>
-                        <p class="card-text"><strong>Medicinal Uses:</strong>
-                            <%= herb.medicinalUses %>
-                        </p>
-                        <p class="card-text"><strong>Cultivation Methods:</strong>
-                            <%= herb.cultivationMethods %>
-                        </p>
-                        <div class="two_btns">
-                            <form method="get" action="/3Dmodel/<%= herb.herb_id %>">
-                                <button type="submit">3D Model</button>
-                            </form>
-                            <button class="voice-btn"
-                                onclick="toggleSpeech('<%= herb.commonNames %>', '<%= herb.botanicalName %>', '<%= herb.habitat %>', '<%= herb.medicinalUses %>', '<%= herb.cultivationMethods %>', this)">
-                                Listen It
-                            </button>
-                        </div>
                     </div>
+                    <form method="get" action="/searchData">
+                        <input type="hidden" name="herb_name" value="<%= herb.commonNames[0] %>">
+                        <button type="submit">View More</button>
+                    </form>
                 </div>
                 <% }) %>
         </div>
