@@ -17,7 +17,7 @@ const themes = [
         cultivationMethods: 'Requires warm climate, well-drained soil, and partial shade.',
         PreparationMethods: 'Used fresh or dried. Commonly consumed as tea or added to food.',
         image: 'https://www.lovethegarden.com/sites/default/files/content/articles/UK_fresh-ginger-harvested.jpg',
-        vidio: '/vidios/Ginger.mp4',
+        vidio: '../public/vidios/Ginger.mp4',
         fav: false
       },
       {
@@ -29,7 +29,7 @@ const themes = [
         cultivationMethods: 'Grows in moist, shaded areas with rich soil.',
         PreparationMethods: "Consumed as tea, oil, or used in steam inhalation",
         image: 'https://www.gardeningknowhow.com/wp-content/uploads/2012/04/peppermint-1.jpg',
-        vidio: '/vidios/papermint.mp4',
+        vidio: '../public/vidios/papermint.mp4',
         fav: false
       },
       {
@@ -41,7 +41,7 @@ const themes = [
         cultivationMethods: 'Thrives in well-drained soil, full sun.',
         PreparationMethods: "Consumed as tea, raw seeds, or used in spice blends",
         image: 'https://bulkpricedfoodshoppe.com/wp-content/uploads/2017/02/product_1_0_102440.jpg',
-        vidio: '/vidios/Fennel.mp4',
+        vidio: '../public/vidios/Fennel.mp4',
 
         fav: false
       }
@@ -64,7 +64,7 @@ const themes = [
         cultivationMethods: 'Grows well in warm climates with full sun and regular watering.',
         PreparationMethods: "Consumed as tea, juice, or used in oil form",
         image: 'http://ayurvedicmagazine.com/wp-content/uploads/2016/01/tulsi.jpg',
-        vidio: '/vidios/Tulsi.mp4',
+        vidio: '../public/vidios/Tulsi.mp4',
 
         fav: false
       },
@@ -77,7 +77,7 @@ const themes = [
         cultivationMethods: 'Grows in well-drained soil, full sun, and requires little water.',
         PreparationMethods: "Consumed as powder, capsules, or brewed as tea",
         image: 'https://healthjade.com/wp-content/uploads/2018/07/ashwagandha.jpg',
-        vidio: '/vidios/Aswagandha.mp4',
+        vidio: '../public/vidios/Aswagandha.mp4',
 
         fav: false
       },
@@ -90,7 +90,7 @@ const themes = [
         cultivationMethods: 'Prefers well-drained soil, full sun, and regular watering.',
         PreparationMethods: "Consumed as tea, tincture, or in capsule form",
         image: 'https://worldoffloweringplants.com/wp-content/uploads/2014/05/Echinacea-purpurea-Eastern-Purple-Coneflower3.jpg',
-        vidio: '/vidios/Echinacea.mp4',
+        vidio: '../public/vidios/Echinacea.mp4',
 
         fav: false
       }
@@ -113,7 +113,7 @@ const themes = [
         cultivationMethods: 'Grows well in dry, well-drained soil with full sun.',
         PreparationMethods: "Applied topically as gel, consumed as juice, or used in supplements",
         image: 'https://eattheplanet.org/wp-content/uploads/2019/11/pisauikan-N29JXkNO1xI-unsplash-1.jpg',
-        vidio: '/vidios/Alovera.mp4',
+        vidio: '../public/vidios/Alovera.mp4',
 
         fav: false
       },
@@ -126,7 +126,7 @@ const themes = [
         cultivationMethods: 'Thrives in hot, dry conditions with well-drained soil.',
         PreparationMethods: "Consumed as tea, applied topically as oil or paste, or used in supplements",
         image: 'https://static.toiimg.com/photo/68670559.cms',
-        vidio: '/vidios/Neem.mp4',
+        vidio: '../public/vidios/Neem.mp4',
 
         fav: false
       },
@@ -139,7 +139,7 @@ const themes = [
         cultivationMethods: 'Requires warm climate, rich soil, and partial shade.',
         PreparationMethods: "Consumed as a spice in cooking, taken as a supplement, or used in topical applications",
         image: 'https://img.emedihealth.com/wp-content/uploads/2020/10/turmeric-feat-1.jpg',
-        vidio: '/vidios/Turmeric.mp4',
+        vidio: '../public/vidios/Turmeric.mp4',
 
         fav: false
       }
@@ -162,7 +162,7 @@ const themes = [
         cultivationMethods: 'Thrives in moist, boggy conditions with partial shade.',
         PreparationMethods: "Consumed as a powder, in teas, or as capsules; can also be used in tinctures",
         image: 'https://www.itoozhiayurveda.in/wp-content/uploads/2019/05/Brahmi.jpg',
-        vidio: '/vidios/Brahmi.mp4',
+        vidio: '../public/vidios/Brahmi.mp4',
 
         fav: false
       },
@@ -175,7 +175,7 @@ const themes = [
         cultivationMethods: 'Grows well in well-drained soil, full sun, and regular watering.',
         PreparationMethods: "Consumed as a tea, used as an extract, or applied as a topical compress",
         image: 'https://fthmb.tqn.com/WKV53AQuXN8v6tuwBtkOIAGLUVQ=/2118x1418/filters:fill(auto,1)/172315301-56a34a505f9b58b7d0d14ead.jpg',
-        vidio: '/vidios/Chamomile.mp4',
+        vidio: '../public/vidios/Chamomile.mp4',
 
         fav: false
       },
@@ -188,7 +188,7 @@ const themes = [
         cultivationMethods: 'Requires cool climate, well-drained soil, and partial shade.',
         PreparationMethods: "Consumed as a powder, used in tinctures, or applied as an essential oil",
         image: 'https://www.chandigarhayurvedcentre.com/wp-content/uploads/2020/10/JATAMANSI.jpg',
-        vidio: '/vidios/Jasmanti.mp4',
+        vidio: '../public/vidios/Jasmanti.mp4',
 
         fav: false
       }
@@ -211,7 +211,7 @@ const themes = [
         cultivationMethods: 'Grows in well-drained soil, full sun, and regular watering.',
         PreparationMethods: "Consumed as tea, tincture, or used in salads; roots can be roasted and used as a coffee substitute",
         image: 'https://tse4.mm.bing.net/th?id=OIP.n-jKv5m2Pa79WxQQdWH6agHaE8&pid=Api&P=0&h=180',
-        vidio: '/vidios/Dandelion.mp4',
+        vidio: '../public/vidios/Dandelion.mp4',
         fav: false
       },
       {
@@ -223,7 +223,7 @@ const themes = [
         cultivationMethods: 'Thrives in dry, well-drained soil with full sun.',
         PreparationMethods: "Consumed as capsules, tinctures, or tea; seeds can be ground and added to foods",
         image: 'https://www.thespruce.com/thmb/r-pMr5W9hX-_j_KkjBKGAKRBSyA=/6000x0/filters:no_upscale():max_bytes(150000):strip_icc()/growing-milk-thistle-5090128-04-c4a517185fb04c39a20ad3f2ea1827b3.jpg',
-        vidio: '/vidios/Milk_Thistle.mp4',
+        vidio: '../public/vidios/Milk_Thistle.mp4',
 
         fav: false
       },
@@ -236,7 +236,7 @@ const themes = [
         cultivationMethods: 'Grows well in well-drained soil, full sun, and regular watering.',
         PreparationMethods: 'Amla can be prepared as juice, powder, oil, or candy, depending on the intended use.',
         image: 'https://www.forestaorganics.com/wp-content/uploads/2020/10/amla-heading-image-1024x805.jpg',
-        vidio: '/vidios/Amla.mp4',
+        vidio: '../public/vidios/Amla.mp4',
         fav: false
       }
     ],

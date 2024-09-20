@@ -11,7 +11,7 @@ const herbs = [
         medicinalUses: 'Detoxifies body, boosts immunity, and improves digestion.',
         cultivationMethods: 'Grows well in well-drained soil, full sun, and regular watering.',
         image: 'https://www.forestaorganics.com/wp-content/uploads/2020/10/amla-heading-image-1024x805.jpg',
-        vidio: '/vidios/Amla.mp4',
+        vidio: '../public/vidios/Amla.mp4',
         fav: true
     }
 ];
