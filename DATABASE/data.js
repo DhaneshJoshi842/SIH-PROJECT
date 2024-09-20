@@ -30,7 +30,6 @@ const themes = [
         PreparationMethods: "Consumed as tea, oil, or used in steam inhalation",
         image: 'https://www.gardeningknowhow.com/wp-content/uploads/2012/04/peppermint-1.jpg',
         vidio: '/vidios/papermint.mp4',
-
         fav: false
       },
       {

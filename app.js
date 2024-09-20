@@ -21,7 +21,7 @@ const FavHerbs = require("./DATABASE/favDBschema");
 
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/SIHDB');
+    await mongoose.connect('mongodb+srv://dhaneshjoshi842:g8LaZrefvnP0U0Ea@cluster0.lhb2m.mongodb.net/');
     // here the above url is used to connect with perticualar data base here we connect with the test data base 
 }
 
